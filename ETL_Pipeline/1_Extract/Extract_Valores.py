@@ -48,11 +48,11 @@ def dados_indicadores_geral(pais_id, indicator_codes):
 
 
 def main():
-    df_paises = pd.read_parquet('../SOFTPLAN/DataSets_Tratamentos/Consume_Zone/Paises/paises.parquet')
-    df_paises = df_paises[df_paises['region'] != 'Agregates']
-    pais_id = df_paises['id'].tolist()
+    df_paises = pd.read_parquet('../SOFTPLAN/Data/Consume_Zone/Paises/paises_final.parquet')
+    df_paises = df_paises[df_paises['REGION'] != 'Agregates']
+    pais_id = df_paises['ID_PAIS'].tolist()
 
-    indicator_codes = ["NY.GDP.MKTP.CD", "NY.GDP.MKTP.CD.XD", "SI.POV.GINI"]
+    indicator_codes = ["NY.GDP.MKTP.CD", "SI.POV.GINI"]
 
     data = dados_indicadores_geral(pais_id, indicator_codes)
 
@@ -90,7 +90,7 @@ def main():
     df.replace('', np.nan, inplace=True)
     
     # Salvar o DataFrame em formato parquet
-    df.to_parquet('../SOFTPLAN/DataSets_Tratamentos/Raw_Zone/Valores/valores.parquet') #editar a pasta para consume_zone
+    df.to_parquet('../SOFTPLAN/Data/Raw_Zone/Valores/valores_raw.parquet') #editar a pasta para consume_zone
     print("DataFrame salvo com sucesso em formato parquet.")
 
 

@@ -78,7 +78,7 @@ def main():
 if __name__ == "__main__":
     result_df = main()
     # Salvando o dataframe resultante em um arquivo Parquet
-    result_df.to_parquet('../SOFTPLAN/DataSets_Tratamentos/Raw_Zone/Paises/paises.parquet')
+    result_df.to_parquet('../SOFTPLAN/Data/Raw_Zone/Paises/paises_raw.parquet')
     print("DataFrame salvo com sucesso em formato parquet.")
     
 
