@@ -16,10 +16,8 @@ def extracao_dados(url, first_page=False):
         if first_page:
             return data[0]['pages']
         else:
-            # Caso contrário, retorne os dados
             return data
     except requests.exceptions.RequestException as e:
-        # Se houve um erro na requisição, imprima uma mensagem de erro e retorne None
         print(f"Enquanto havia a busca dos dados, aconteceu um erro: {str(e)}")
         return None
 
@@ -35,7 +33,6 @@ def convercao_json_to_dataframe(data):
         df = pd.DataFrame(paises)
         return df
     except (KeyError, IndexError) as e:
-        # Se houve um erro na conversão, imprima uma mensagem de erro e retorne None
         print(f"Enquanto acontecia a conversão JSON para Dataframe, aconteceu um erro: {str(e)}")
         return None
 
@@ -50,12 +47,12 @@ def main():
         print("Não foi possível obter o número total de páginas.")
         return None
 
-    # Usando ThreadPoolExecutor para fazer requisições em paralelo
+    # Fazendo requisições em paralelo
     with concurrent.futures.ThreadPoolExecutor() as executor:
         # Fazendo as requisições para todas as páginas
         futures = [executor.submit(extracao_dados, base_url + str(page)) for page in range(1, total_pages + 1)]
 
-        # Para cada resposta que chega, converte os dados em um dataframe e adicione à lista all_data
+        # Para cada resposta que chega, converte os dados em um dataframe e adiciona à lista all_data
         for future in concurrent.futures.as_completed(futures):
             data = future.result()
             if data is None:
@@ -70,11 +67,11 @@ def main():
         df = pd.concat(all_data, ignore_index=True)
         return df
 
-    print(df)
+    
 
 
 
-# Se este script for o módulo principal, execute a função main e salve os resultados em um arquivo Parquet
+# Se este script for o módulo principal, execute a função main e salve os resultados em um arquivo Parquet na camada raw.
 if __name__ == "__main__":
     result_df = main()
     # Salvando o dataframe resultante em um arquivo Parquet
