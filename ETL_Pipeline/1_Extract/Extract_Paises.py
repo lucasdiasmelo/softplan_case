@@ -66,8 +66,8 @@ def main():
     if all_data:
         df = pd.concat(all_data, ignore_index=True)
         return df
+    print(df)    
 
-    
 
 
 
@@ -77,5 +77,5 @@ if __name__ == "__main__":
     # Salvando o dataframe resultante em um arquivo Parquet
     result_df.to_parquet('../SOFTPLAN/Data/Raw_Zone/Paises/paises_raw.parquet')
     print("DataFrame salvo com sucesso em formato parquet.")
-    
+
 

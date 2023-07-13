@@ -25,6 +25,10 @@ df_staging = df[['id', 'name', 'longitude', 'latitude', 'region']]
 # Renomeando as colunas do DataFrame
 df_staging.columns = ['ID_PAIS','NAME','LONGITUDE','LATITUDE','REGION']
 
+#Removendo Países que tem a região 'Aggregates'
+df_staging = df_staging.loc[df_staging['REGION'] != 'Aggregates']
+
+
 # Definindo a função para salvar o DataFrame em um arquivo parquet
 def staging_saved_file_paises(data):
     # Convertendo o DataFrame do pandas em uma tabela PyArrow

@@ -56,8 +56,7 @@ def dados_indicadores_geral(pais_id, indicator_codes):
 def main():
     # Lendo arquivo parquet e armazenando os dados em um DataFrame
     df_paises = pd.read_parquet('../SOFTPLAN/Data/Consume_Zone/Paises/paises_final.parquet')
-    # Removendo linhas onde 'REGION' é 'Agregates'
-    df_paises = df_paises[df_paises['REGION'] != 'Agregates']
+    
     # Convertendo a coluna 'ID_PAIS' para uma lista
     pais_id = df_paises['ID_PAIS'].tolist()
 
